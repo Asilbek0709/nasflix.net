@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, Variants } from "framer-motion";
