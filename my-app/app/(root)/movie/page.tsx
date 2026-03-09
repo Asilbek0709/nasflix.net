@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useCallback } from "react";
 import { motion } from "motion/react";
-import MovieCard from "../../Movies/Cards";
+import MovieCard from "./cards/cards";
 import Search from "../../search/page";
 import { movies } from "../../../lib/movies";
 
