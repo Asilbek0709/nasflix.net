@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import MovieCard from "../../Movies/Cards";
+import MovieCard from "../movie/cards/cards";
 import { movies } from "../../../lib/movies";
 
 // Hero uchun dastlabki 5 ta film
