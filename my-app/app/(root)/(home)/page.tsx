@@ -39,20 +39,20 @@ const POPULAR_MOVIES = movies
 export default function Home() {
   const router = useRouter();
   const [activeIdx, setActiveIdx] = useState(0);
-  const timerRef = useRef(null);
   const current = HERO_MOVIES[activeIdx];
 
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
   const startTimer = () => {
-    clearInterval(timerRef.current);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
     timerRef.current = setInterval(() => {
       setActiveIdx((p) => (p + 1) % HERO_MOVIES.length);
     }, 4000);
   };
 
-  useEffect(() => {
-    startTimer();
-    return () => clearInterval(timerRef.current);
-  }, []);
 
   const handleSelect = (i) => {
     setActiveIdx(i);
