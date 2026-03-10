@@ -36,13 +36,16 @@ export interface Movie {
 
   genres: string[]
 
+
+  
+
   poster: string
   video: string
   trailer: string
 
   country: string
-  director: string
-  actors: string[]
+  director: object
+  actors: object[]
 
   subscription: "basic" | "medium" | "pro"
 

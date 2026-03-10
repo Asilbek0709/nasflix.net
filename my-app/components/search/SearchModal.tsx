@@ -24,10 +24,10 @@ export default function SearchModal({ open, onClose, movies }: SearchModalProps)
     return movies.filter((m) => getMovieTitle(m).toLowerCase().includes(q));
   }, [movies, query]);
 
-  const handleSelect = (slug: string) => {
+  const handleSelect = (id: string) => {
     onClose();
     setQuery("");
-    router.push(`/movie/${slug}`);
+    router.push(`/movies/${id}`);
   };
 
   return (
@@ -96,7 +96,7 @@ export default function SearchModal({ open, onClose, movies }: SearchModalProps)
                   />
                   <div className="min-w-0 flex-1">
                     <p className="font-medium text-white truncate">
-                      {getMovieTitle(movie)}
+                      {movie.originalTitle}
                     </p>
                     <p className="text-sm text-zinc-500">{movie.year}</p>
                   </div>

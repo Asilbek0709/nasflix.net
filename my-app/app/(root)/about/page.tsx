@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useRef } from "react";
+import { ReactNode, useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, Variants } from "framer-motion";
 import RedButton from "../../ui/button";
@@ -18,6 +18,7 @@ interface ShowcaseItem {
 interface ShowcaseRowProps {
   item: ShowcaseItem;
   index: number;
+  key: ReactNode;
 }
 
 const fadeUp: Variants = {
@@ -76,7 +77,7 @@ const SHOWCASE: ShowcaseItem[] = [
   },
 ];
 
-function ShowcaseRow({ item, index }: ShowcaseRowProps) {
+function ShowcaseRow({ item, index,key }: ShowcaseRowProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const isLeft = item.align === "left";
@@ -137,8 +138,8 @@ function ShowcaseRow({ item, index }: ShowcaseRowProps) {
           animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         />
-        <h2 className="text-3xl font-bold text-white"></h2>
-        <p className="text-gray-400 leading-relaxed"></p>
+        <h2 className="text-3xl font-bold text-white">{item.nameKey}</h2>
+        <p className="text-gray-400 leading-relaxed">{item.textKey}</p>
       </motion.div>
     </motion.section>
   );
@@ -222,7 +223,7 @@ export default function About() {
 
       <section className="py-10 px-6 md:px-16">
         {SHOWCASE.map((item, i) => (
-          <ShowcaseRow key={i} item={item} index={i} />
+          <ShowcaseRow key={i} item={item} index={i}  />
         ))}
       </section>
 

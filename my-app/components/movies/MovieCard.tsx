@@ -27,7 +27,7 @@ export default function MovieCard({ movie, progress = 0, duration, inMyList, onT
       transition={{ duration: 0.4 }}
       className="group relative aspect-[2/3] w-full rounded-lg overflow-hidden bg-zinc-900"
     >
-      <Link href={`/movie/${movie.slug}`} className="block w-full h-full">
+      <Link href={`/movie/${movie.id}`} className="block w-full h-full">
         <Image
           src={movie.poster}
           alt={title}
