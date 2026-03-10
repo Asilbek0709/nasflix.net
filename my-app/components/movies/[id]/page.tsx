@@ -26,7 +26,7 @@ type Movie = {
 
 const MoviePageSkeleton: FC = () => (
   <div className="min-h-screen bg-[#0d0f14] flex items-center justify-center text-white">
-    <p>Loading...</p>
+    <p>Yuklanmoqda...</p>
   </div>
 );
 
