@@ -96,7 +96,7 @@ export default function SearchModal({ open, onClose, movies }: SearchModalProps)
                   />
                   <div className="min-w-0 flex-1">
                     <p className="font-medium text-white truncate">
-                      {movie.originalTitle}
+                      {movie.title.uz}
                     </p>
                     <p className="text-sm text-zinc-500">{movie.year}</p>
                   </div>
