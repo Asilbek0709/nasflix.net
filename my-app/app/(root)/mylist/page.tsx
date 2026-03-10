@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth.context";
 import { movies } from "@/data/movies";
-import MovieCard from "@/components/movies/MovieCard";
+import MovieCard from "@/components/movies/page";
 import { getMyList, removeFromMyList, addToMyList } from "@/services/my-list.service";
 import type { Movie } from "@/types";
 

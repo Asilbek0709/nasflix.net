@@ -1,178 +1,58 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
-import { motion } from "motion/react";
-import MovieCard from "./cards/cards";
-import Search from "../../search/page";
-import { movies } from "../../../lib/movies";
+import { useState, useEffect, useRef, useCallback } from "react";
+import MovieCard, { MovieCardType } from "../../../components/movies/Card";
 
-interface MovieTranslation {
-  title?: string;
-}
 
-interface MovieGenre {
-  name?: string;
-}
+export default function MoviesPage() {
+  const [movies, setMovies] = useState<MovieCardType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const API_KEY = "9e5d3e2c9b3806d1805188f6d929d903";
 
-interface Movie {
-  id: string | number;
-  originalTitle?: string;
-  translations?: {
-    uz?: MovieTranslation;
-  };
-  genres: string[];
-  availableLanguages: string[];
-  year?: number;
-  type?: string;
-  poster?: string | null;
-  rating?: number;
-}
+  useEffect(() => {
+    const fetchMovies = async () => {
+      setLoading(true);
+      try {
+        // Только первая страница
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=uz-UZ&page=1`
+        );
+        const data = await res.json();
+        const moviesArray = Array.isArray(data.results) ? data.results : [];
 
-interface Suggestion {
-  id: string | number;
-  title: string;
-  originalTitle?: string;
-  year?: string;
-  type?: string;
-  poster?: string | null;
-  rating?: string | null;
-}
+        const formatted: MovieCardType[] = moviesArray.map((m: any) => ({
+          id: m.id,
+          title: m.title,
+          poster: m.poster_path
+            ? `https://image.tmdb.org/t/p/w500${m.poster_path}`
+            : undefined,
+          rating: m.vote_average,
+          year: m.release_date ? m.release_date.split("-")[0] : undefined,
+        }));
 
-const Movies: React.FC = () => {
-  const [query, setQuery] = useState<string>("");
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [selectedLang, setSelectedLang] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<string>("");
-  const [selectedYear, setSelectedYear] = useState<string>("");
+        setMovies(formatted);
+      } catch (err) {
+        console.error("Failed to fetch movies:", err);
+        setMovies([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const getSuggestions = useCallback((searchQuery: string): Suggestion[] => {
-    if (!searchQuery || searchQuery.trim().length < 2) return [];
-
-    const q = searchQuery.toLowerCase().trim();
-
-    return (movies as Movie[])
-      .filter((m) => {
-        const uzTitle = m.translations?.uz?.title?.toLowerCase() || "";
-        const original = m.originalTitle?.toLowerCase() || "";
-        return uzTitle.includes(q) || original.includes(q);
-      })
-      .slice(0, 7)
-      .map((m) => ({
-        id: m.id,
-        title: m.translations?.uz?.title || m.originalTitle || "Unknown",
-        originalTitle: m.originalTitle,
-        year: String(m.year || ""),
-        type: m.type === "serial" ? "Serial" : "Film",
-        poster: m.poster || null,
-        rating: m.rating ? String(m.rating) : null,
-      }));
+    fetchMovies();
   }, []);
 
-  const filtered = useMemo(() => {
-    return (movies as Movie[]).filter((m) => {
-      const title = m.translations?.uz?.title?.toLowerCase() || "";
-      const original = m.originalTitle?.toLowerCase() || "";
-
-      if (
-        query &&
-        !title.includes(query.toLowerCase()) &&
-        !original.includes(query.toLowerCase())
-      ) {
-        return false;
-      }
-
-      if (selectedGenres.length > 0) {
-        const movieGenres = m.genres.map((g) => g.toLowerCase());
-        const match = selectedGenres.some((g) =>
-          movieGenres.includes(g.toLowerCase())
-        );
-        if (!match) return false;
-      }
-
-      if (selectedLang && !m.availableLanguages.includes(selectedLang)) {
-        return false;
-      }
-
-      if (selectedYear && String(m.year) !== selectedYear) {
-        return false;
-      }
-
-      if (selectedType && selectedType !== "movies") {
-        return false;
-      }
-
-      return true;
-    });
-  }, [query, selectedGenres, selectedLang, selectedType, selectedYear]);
-
-  const displayMovies = filtered.map((m) => ({
-  id: m.id,
-  title: m.translations?.uz?.title || m.originalTitle || "Unknown",
-  year: String(m.year || ""),
-  rating: m.rating ? String(m.rating) : "N/A",
-  poster: m.poster ?? undefined,
-}));
+  if (loading) return <p className="text-white p-6">Kinolar yuklanmoqda....</p>;
+  if (!movies.length) return <p className="text-white p-6">Kinolar topilmadi</p>;
 
   return (
-    <div className="bg-black min-h-screen w-full">
-      <Search
-        query={query}
-        setQuery={setQuery}
-        selectedGenres={selectedGenres}
-        setSelectedGenres={setSelectedGenres}
-        selectedLang={selectedLang}
-        setSelectedLang={setSelectedLang}
-        selectedType={selectedType}
-        setSelectedType={setSelectedType}
-        selectedYear={selectedYear}
-        setSelectedYear={setSelectedYear}
-        getSuggestions={getSuggestions}
-      />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        className="px-6 pb-10 mt-10"
-      >
-        <p
-          className="text-gray-500 text-sm mb-4"
-          style={{ fontFamily: "'Outfit', sans-serif" }}
-        >
-          {displayMovies.length} ta film topildi
-        </p>
-
-        {displayMovies.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 gap-3">
-            <span className="text-5xl">🎬</span>
-            <p
-              className="text-white text-lg font-bold"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Film topilmadi
-            </p>
-            <p
-              className="text-gray-500 text-sm"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Boshqa kalit so'z yoki filtr bilan qidiring
-            </p>
-          </div>
-        ) : (
-          <div
-            className="grid gap-4"
-            style={{
-              gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
-            }}
-          >
-            {displayMovies.map((movie, i) => (
-              <MovieCard key={movie.id} movie={movie} index={i} />
-            ))}
-          </div>
-        )}
-      </motion.div>
+    <div className="p-6">
+      <h1 className="text-white text-3xl mb-6">Barcha kinolar</h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        {movies.map((movie, i) => (
+          <MovieCard key={movie.id} movie={movie} index={i} />
+        ))}
+      </div>
     </div>
   );
-};
-
-export default Movies;
+}

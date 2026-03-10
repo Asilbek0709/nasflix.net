@@ -41,7 +41,7 @@ const MovieCard: FC<MovieCardProps> = ({ movie, index = 0 }) => {
           transition={{ type: "spring", stiffness: 280, damping: 22 }}
           className="relative rounded-2xl overflow-hidden mb-2"
           style={{
-            height: 240,
+            height: 480,
             boxShadow: hovered
               ? "0 0 0 2px rgba(229,9,20,0.75), 0 16px 32px rgba(0,0,0,0.6)"
               : "0 4px 14px rgba(0,0,0,0.4)",
@@ -53,7 +53,7 @@ const MovieCard: FC<MovieCardProps> = ({ movie, index = 0 }) => {
               src={movie.poster}
               alt={movie.title ?? "Movie"}
               fill
-              sizes="160px"
+              sizes="320px"
               className="object-cover"
             />
           ) : (

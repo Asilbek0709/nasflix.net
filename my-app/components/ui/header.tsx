@@ -32,17 +32,16 @@ type HeaderProps = {
 // ─── Nav links ────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
-  { label: "Home",    href: "/" },
-  { label: "About",   href: "/about" },
-  { label: "Movies",  href: "/movie" },
-  { label: "Trending",href: "/trending" },
-  { label: "My List", href: "/mylist" },
-  { label: "Contact", href: "/contact" },
+  { label: "Bosh sahifa",    href: "/" },
+  { label: "Biz haqimizda",   href: "/about" },
+  { label: "Kinolar",  href: "/movie" },
+  { label: "Aloqa", href: "/contact" },
 ];
 
 const DROPDOWN_ITEMS = [
   { label: "Profile",  href: "/profile" },
   { label: "Settings", href: "/settings" },
+  { label: "Tanlangan filmlar", href: "/mylist" }
 ];
 
 // ─── Animation variants ───────────────────────────────────────────────────────

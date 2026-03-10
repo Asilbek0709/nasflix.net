@@ -44,35 +44,35 @@ const SHOWCASE: ShowcaseItem[] = [
     imgSrc:
       "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
     nameKey: "Torayev Umidjon",
-    textKey: "Zamonaviy texnologiyalar bilan qurilgan platforma sizga eng yaxshi tomosha tajribasini taqdim etadi. Tez, qulay va ishonchli.",
+    textKey: "Loyiha rejasini tuzdi, jamoa ishini tashkil qildi va vazifalarni taqsimladi. Ish jarayonini nazorat qilib, loyihaning o‘z vaqtida bajarilishini ta’minladi & Next.js yordamida saytning foydalanuvchi interfeysini yaratdi. Sahifalar, komponentlar va responsiv dizayn ustida ishladi.",
     align: "left",
   },
   {
     imgSrc:
       "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
-    nameKey: "Torayev Umidjon",
-    textKey: "Zamonaviy texnologiyalar bilan qurilgan platforma sizga eng yaxshi tomosha tajribasini taqdim etadi. Tez, qulay va ishonchli.",
+    nameKey: "Tursunov Asilbek",
+    textKey: "Next.js yordamida saytning foydalanuvchi interfeysini yaratdi. Sahifalar, komponentlar va responsiv dizayn ustida ishladi & Server tomonini ishlab chiqdi, API larni sozladi va ma’lumotlar bazasi bilan ishladi. Saytning ma’lumot almashinuvi va funksiyalarini ta’minladi.",
     align: "right",
   },
   {
     imgSrc:
       "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
     nameKey: "Torayev Umidjon",
-    textKey: "Zamonaviy texnologiyalar bilan qurilgan platforma sizga eng yaxshi tomosha tajribasini taqdim etadi. Tez, qulay va ishonchli.",
+    textKey: "Figma orqali sayt dizaynini ishlab chiqdi. Sahifalar maketi, ranglar va foydalanuvchi uchun qulay interfeys yaratish bilan shug‘ullandi.",
     align: "left",
   },
   {
     imgSrc:
       "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
     nameKey: "Torayev Umidjon",
-    textKey: "Zamonaviy texnologiyalar bilan qurilgan platforma sizga eng yaxshi tomosha tajribasini taqdim etadi. Tez, qulay va ishonchli.",
+    textKey: "Sayt funksiyalarini tekshirdi, xatolarni aniqladi va ularni tuzatish bo‘yicha tavsiyalar berdi. Loyihaning barqaror ishlashini nazorat qildi.",
     align: "right",
   },
   {
     imgSrc:
       "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
     nameKey: "Torayev Umidjon",
-    textKey: "Zamonaviy texnologiyalar bilan qurilgan platforma sizga eng yaxshi tomosha tajribasini taqdim etadi. Tez, qulay va ishonchli.",
+    textKey: "Loyihani serverga joylashtirdi, hosting va domen sozlamalarini amalga oshirdi, saytning ishlashini monitoring qildi.",
     align: "left",
   },
 ];

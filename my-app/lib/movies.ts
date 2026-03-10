@@ -4649,6 +4649,4 @@ export const movies: Movie[] = [
     country: "France", director: "Céline Sciamma",
     actors: ["Noémie Merlant", "Adèle Haenel"], subscription: "pro",
   },
-];  
-
-
+];

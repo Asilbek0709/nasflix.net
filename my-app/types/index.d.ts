@@ -36,7 +36,9 @@ export interface Movie {
 
   genres: string[]
 
+  director: string
 
+  actors: string[]
   
 
   poster: string
