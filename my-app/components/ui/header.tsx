@@ -169,7 +169,6 @@ export default function Header({ user, onLogout, onSearchClick }: HeaderProps) {
       >
         {/* Nav bar */}
         <motion.nav
-          variants={navVariants}
           initial="hidden"
           animate="visible"
           style={{
@@ -190,7 +189,7 @@ export default function Header({ user, onLogout, onSearchClick }: HeaderProps) {
           className="flex items-center justify-between border"
         >
           {/* ── Logo ── */}
-          <motion.div variants={logoVariants}>
+          <motion.div>
             <Link href="/" className="no-underline select-none">
               <motion.div
                 className="relative flex items-center"
@@ -217,7 +216,7 @@ export default function Header({ user, onLogout, onSearchClick }: HeaderProps) {
             variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.28 } } }}
           >
             {NAV_LINKS.map(({ label, href }) => (
-              <motion.li key={href} variants={childVariants}>
+              <motion.li key={href} >
                 <NavLink href={href} label={label} />
               </motion.li>
             ))}

@@ -14,10 +14,10 @@ export default function RootShell({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const avatarSrc =
-    user?.profiles?.[0]?.avatar?.startsWith("/uploads")
-      ? `${API_URL}${user.profiles[0].avatar}`
-      : user?.profiles?.[0]?.avatar ?? null;
+  // const avatarSrc =
+  //   user?.profiles?.[0]?.avatar?.startsWith("/uploads")
+  //     ? `${API_URL}${user.profiles[0].avatar}`
+  //     : user?.profiles?.[0]?.avatar ?? null;
 
   const handleLogout = async () => {
     await logout();
