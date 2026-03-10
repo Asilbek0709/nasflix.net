@@ -4,7 +4,7 @@ import { TextField } from "@mui/material"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
-export default function Contact(): JSX.Element {
+export default function Contact(){
 
 
   const [name, setName] = useState<string>("")
