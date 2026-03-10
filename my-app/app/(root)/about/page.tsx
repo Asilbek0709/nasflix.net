@@ -77,7 +77,6 @@ const SHOWCASE: ShowcaseItem[] = [
 ];
 
 function ShowcaseRow({ item, index }: ShowcaseRowProps) {
-  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const isLeft = item.align === "left";
@@ -138,15 +137,14 @@ function ShowcaseRow({ item, index }: ShowcaseRowProps) {
           animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         />
-        <h2 className="text-3xl font-bold text-white">{t(item.nameKey)}</h2>
-        <p className="text-gray-400 leading-relaxed">{t(item.textKey)}</p>
+        <h2 className="text-3xl font-bold text-white"></h2>
+        <p className="text-gray-400 leading-relaxed"></p>
       </motion.div>
     </motion.section>
   );
 }
 
 export default function About() {
-  const { t } = useTranslation();
 
   const heroRef = useRef<HTMLDivElement | null>(null);
   const heroInView = useInView(heroRef, { once: true });
@@ -180,7 +178,6 @@ export default function About() {
                 width={1100}
                 height={600}
                 className="object-cover w-full"
-                priority
               />
             </motion.div>
           </motion.div>
