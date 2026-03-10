@@ -46,4 +46,4 @@ export interface Movie {
 
   subscription: "basic" | "medium" | "pro"
 
-}
+}   

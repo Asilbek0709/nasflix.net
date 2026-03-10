@@ -106,12 +106,12 @@ const Movies: React.FC = () => {
   }, [query, selectedGenres, selectedLang, selectedType, selectedYear]);
 
   const displayMovies = filtered.map((m) => ({
-    id: m.id,
-    title: m.translations?.uz?.title || m.originalTitle || "Unknown",
-    year: String(m.year || ""),
-    rating: m.rating ? String(m.rating) : "N/A",
-    poster: m.poster || null,
-  }));
+  id: m.id,
+  title: m.translations?.uz?.title || m.originalTitle || "Unknown",
+  year: String(m.year || ""),
+  rating: m.rating ? String(m.rating) : "N/A",
+  poster: m.poster ?? undefined,
+}));
 
   return (
     <div className="bg-black min-h-screen w-full">
