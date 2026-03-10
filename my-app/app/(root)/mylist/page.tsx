@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth.context";
 import { movies } from "@/data/movies";
-import MovieCard from "@/components/movies/page";
+import MovieCard from "../../../components/movies/Card";
 import { getMyList, removeFromMyList, addToMyList } from "@/services/my-list.service";
 import type { Movie } from "@/types";
+import { title } from "process";
 
 export default function MyListPage() {
   const { user } = useAuth();
@@ -135,11 +136,7 @@ export default function MyListPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, delay: i * 0.05 }}
                 >
-                  <MovieCard
-                    movie={movie}
-                    inMyList
-                    onToggleMyList={() => handleToggleMyList(movie.id, true)}
-                  />
+                  
                 </motion.div>
               ))}
             </motion.div>
