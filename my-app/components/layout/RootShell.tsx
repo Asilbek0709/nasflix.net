@@ -28,7 +28,6 @@ export default function RootShell({ children }: { children: React.ReactNode }) {
     <>
       <Header
         user={user}
-        avatarSrc={avatarSrc}
         onLogout={handleLogout}
         onSearchClick={() => setSearchOpen(true)}
       />

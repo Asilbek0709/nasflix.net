@@ -24,6 +24,7 @@ type User = {
 
 type HeaderProps = {
   user: User | null;
+  avatarSrc?: string | null;
   onLogout: () => void;
   onSearchClick: () => void;
 };
