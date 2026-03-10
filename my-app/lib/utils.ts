@@ -4,11 +4,11 @@ import type { Movie } from "@/types";
 const DISPLAY_LANG = "en" as const;
 
 export function getMovieTitle(movie: Movie): string {
-  return movie.title[DISPLAY_LANG] ?? movie.title.en ?? "";
+  return movie.title?.[DISPLAY_LANG] ?? movie.title?.en ?? "";
 }
 
 export function getMovieDescription(movie: Movie): string {
-  return movie.description[DISPLAY_LANG] ?? movie.description.en ?? "";
+  return movie.description?.[DISPLAY_LANG] ?? movie.description?.en ?? "";
 }
 
 const TIER_ORDER: Record<string, number> = { basic: 1, medium: 2, pro: 3 };
