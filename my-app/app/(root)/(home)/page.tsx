@@ -54,7 +54,7 @@ export default function Home() {
   };
 
 
-  const handleSelect = (i) => {
+  const handleSelect = (i: number) => {
     setActiveIdx(i);
     startTimer();
   };
