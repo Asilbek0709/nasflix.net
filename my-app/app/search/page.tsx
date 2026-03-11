@@ -94,8 +94,9 @@ function SearchWithAutocomplete({
   const debouncedQuery = useDebounce(query);
 
   const suggestions = useMemo(() => {
-    if (!getSuggestions || debouncedQuery.trim().length < 2) return [];
-    return getSuggestions(debouncedQuery);
+    const safeQuery = (debouncedQuery ?? "").trim();
+    if (!getSuggestions || safeQuery.length < 2) return [];
+    return getSuggestions(safeQuery);
   }, [debouncedQuery, getSuggestions]);
 
   useEffect(() => {
