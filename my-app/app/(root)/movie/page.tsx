@@ -6,7 +6,7 @@ import { getMyList, addToMyList, removeFromMyList } from "@/services/my-list.ser
 import { Movie } from "@/types";
 
 export default function MoviesPage() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<MovieCardType[]>([]);
   const [loading, setLoading] = useState(true);
   const [myListIds, setMyListIds] = useState<Set<string>>(new Set());
 
@@ -90,8 +90,6 @@ export default function MoviesPage() {
             key={movie.id}
             movie={movie}
             index={i}
-            myList={myListIds.has(String(movie.id))} 
-            onToggleMyList={() => toggleMyList(movie.id)}
           />
         ))}
       </div>

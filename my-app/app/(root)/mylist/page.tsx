@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth.context";
-import MovieCard from "../../../components/movies/Card";
+import MovieCard, { MovieCardType } from "../../../components/movies/Card";
 import { getMyList, removeFromMyList, addToMyList } from "@/services/my-list.service";
 import type { Movie } from "@/types";
 
@@ -13,7 +13,7 @@ export default function MyListPage() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<MovieCardType[]>([]);
   const [myListIds, setMyListIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
@@ -52,30 +52,7 @@ export default function MyListPage() {
 
         const results = await Promise.all(requests);
 
-        const formatted: Movie[] = results.map((m: any) => ({
-          id: m.id,
-          slug: String(m.id),
-
-          title: {
-            uz: m.title,
-            ru: m.title,
-            en: m.title
-          },
-
-          description: {
-            uz: m.overview,
-            ru: m.overview,
-            en: m.overview
-          },
-
-          year: m.release_date?.split("-")[0] || "",
-          rating: m.vote_average,
-
-          poster: `https://image.tmdb.org/t/p/w500${m.poster_path}`,
-          backdrop: `https://image.tmdb.org/t/p/original${m.backdrop_path}`
-        }));
-
-        setMovies(formatted);
+        
 
       } catch (e) {
         console.error(e);
@@ -146,18 +123,6 @@ export default function MyListPage() {
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
             >
 
-              {movies.map((movie, i) => (
-
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  index={i}
-                  onToggleMyList={() =>
-                    handleToggleMyList(movie.id, true)
-                  }
-                />
-
-              ))}
 
             </motion.div>
 
