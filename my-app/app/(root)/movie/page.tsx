@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import MovieCard, { MovieCardType } from "../../components/movies/Card";
+import MovieCard, { MovieCardType } from "../../../components/movies/Card";
 import { getMyList, addToMyList, removeFromMyList } from "@/services/my-list.service";
 import { Movie } from "@/types";
 
