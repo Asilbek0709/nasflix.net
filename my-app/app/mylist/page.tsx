@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth.context";
-import MovieCard, { MovieCardType } from "../../../components/movies/Card";
+import MovieCard, { MovieCardType } from "../../components/movies/Card";
 import { getMyList, removeFromMyList, addToMyList } from "@/services/my-list.service";
 import type { Movie } from "@/types";
 
