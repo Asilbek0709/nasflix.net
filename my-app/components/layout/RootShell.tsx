@@ -5,9 +5,8 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/ui/header";
 import SearchModal from "@/components/search/SearchModal";
 import { useAuth } from "@/context/auth.context";
-import { movies } from "@/data/movies";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 
 export default function RootShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
