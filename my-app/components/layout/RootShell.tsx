@@ -34,7 +34,6 @@ export default function RootShell({ children }: { children: React.ReactNode }) {
       <SearchModal
         open={searchOpen}
         onClose={() => setSearchOpen(false)}
-        movies={movies}
       />
       {children}
     </>
