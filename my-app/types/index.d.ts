@@ -41,7 +41,7 @@ export interface Movie {
   trailer: string
 
   country: string
-  director: string;        // исправлено
+  director: { name: string, name: string[] };        // исправлено
   actors: { name: string }[]; 
 
   subscription: "basic" | "medium" | "pro"
