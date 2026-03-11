@@ -1,28 +1,96 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Dialog, IconButton, TextField } from "@mui/material";
 import { MdClose } from "react-icons/md";
-import type { Movie } from "@/types";
-import { getMovieTitle } from "@/lib/utils";
+
+type Movie = {
+  id: number;
+  slug: string;
+  title: string;
+  year: string;
+  poster: string;
+};
 
 type SearchModalProps = {
   open: boolean;
   onClose: () => void;
-  movies: Movie[];
 };
 
-export default function SearchModal({ open, onClose, movies }: SearchModalProps) {
+export default function SearchModal({ open, onClose }: SearchModalProps) {
   const router = useRouter();
+
   const [query, setQuery] = useState("");
+  const [allMovies, setAllMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const API_KEY = "9e5d3e2c9b3806d1805188f6d929d903";
+
+  // ─── LOAD MANY PAGES ─────────────────────
+
+  useEffect(() => {
+    if (!open) return;
+
+    const fetchMovies = async () => {
+      setLoading(true);
+
+      try {
+        const pages = 3;
+        const requests = [];
+
+        for (let i = 1; i <= pages; i++) {
+          requests.push(
+            fetch(
+              `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${i}`
+            ).then((res) => res.json())
+          );
+        }
+
+        const results = await Promise.all(requests);
+
+        const movies = results.flatMap((page) =>
+          page.results.map((m: any) => ({
+            id: m.id,
+            slug: String(m.id),
+            title: m.title,
+            year: m.release_date?.split("-")[0] || "",
+            poster: `https://image.tmdb.org/t/p/w500${m.poster_path}`,
+          }))
+        );
+
+        // удаляем дубликаты
+        const uniqueMovies = Array.from(
+          new Map(movies.map((m) => [m.id, m])).values()
+        );
+
+        setAllMovies(uniqueMovies);
+
+        setAllMovies(movies);
+      } catch (e) {
+        console.error(e);
+      }
+
+      setLoading(false);
+    };
+
+    fetchMovies();
+  }, [open]);
+
+  // ─── SEARCH FILTER ─────────────────────
 
   const results = useMemo(() => {
-    if (!query.trim()) return movies;
+    if (!query.trim()) return allMovies;
+
     const q = query.toLowerCase();
-    return movies.filter((m) => getMovieTitle(m).toLowerCase().includes(q));
-  }, [movies, query]);
+
+    return allMovies.filter((m) =>
+      m.title.toLowerCase().includes(q)
+    );
+  }, [query, allMovies]);
+
+  // ─── SELECT MOVIE ─────────────────────
 
   const handleSelect = (id: string) => {
     onClose();
@@ -47,7 +115,10 @@ export default function SearchModal({ open, onClose, movies }: SearchModalProps)
       }}
     >
       <div className="p-4">
-        <div className="flex items-center justify-between gap-2 mb-4">
+
+        {/* SEARCH INPUT */}
+
+        <div className="flex items-center gap-2 mb-4">
           <TextField
             placeholder="Search movies..."
             value={query}
@@ -60,50 +131,61 @@ export default function SearchModal({ open, onClose, movies }: SearchModalProps)
               "& .MuiOutlinedInput-root": {
                 color: "#fff",
                 "& fieldset": { borderColor: "#3f3f46" },
-                "&:hover fieldset": { borderColor: "#52525b" },
               },
             }}
           />
-          <IconButton onClick={onClose} sx={{ color: "#fff" }} size="small">
-            <MdClose size={24} />
+
+          <IconButton onClick={onClose} sx={{ color: "#fff" }}>
+            <MdClose size={22} />
           </IconButton>
         </div>
+
+        {/* RESULTS */}
+
         <div className="overflow-y-auto max-h-[60vh] space-y-2">
+
           <AnimatePresence mode="wait">
-            {results.length === 0 ? (
+
+            {loading ? (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-zinc-500 py-4 text-center"
+                className="text-center text-zinc-500 py-4"
               >
-                No movies found
+                Loading movies...
               </motion.p>
             ) : (
               results.map((movie, i) => (
                 <motion.button
                   key={movie.id}
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.02 }}
-                  type="button"
+                  transition={{ delay: i * 0.01 }}
                   onClick={() => handleSelect(movie.slug)}
-                  className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-800/80 text-left transition"
+                  className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-800 transition"
                 >
                   <img
                     src={movie.poster}
-                    alt=""
-                    className="w-14 h-20 object-cover rounded shrink-0 bg-zinc-800"
+                    alt={movie.title}
+                    className="w-14 h-20 object-cover rounded"
                   />
-                  <div className="min-w-0 flex-1">
-                    <p className="font-medium text-white truncate">
-                      {movie.title.uz}
+
+                  <div className="text-left">
+                    <p className="font-medium text-white">
+                      {movie.title}
                     </p>
-                    <p className="text-sm text-zinc-500">{movie.year}</p>
+
+                    <p className="text-sm text-zinc-500">
+                      {movie.year}
+                    </p>
                   </div>
+
                 </motion.button>
               ))
             )}
+
           </AnimatePresence>
+
         </div>
       </div>
     </Dialog>
