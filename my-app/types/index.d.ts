@@ -40,9 +40,9 @@ export interface Movie {
   video: string
   trailer: string
 
-  country: string
-  director: { name: string | string[]};        // исправлено
-  actors: { name: string }[]; 
+  country: string;
+  director: string | string[];       // исправлено
+  actors: string | string[]; 
 
   subscription: "basic" | "medium" | "pro"
 
