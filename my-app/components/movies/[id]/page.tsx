@@ -46,19 +46,6 @@ export default function MoviePage() {
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const found = movies.find((m) => m.id === movieId);
-      if (found) {
-        setMovie(found);
-      }
-      setLoading(false);
-    }, 500); // эмуляция загрузки
-
-    return () => clearTimeout(timer);
-  }, [movieId]);
-
-  if (loading) return <MoviePageSkeleton />;
 
   if (!movie)
     return (
