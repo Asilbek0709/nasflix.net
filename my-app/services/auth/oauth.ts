@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000"
+const API_URL = "https://nasflix-net-krpr.vercel.app/"
 
 export const loginWithGoogle = () => {
   window.location.href = `${API_URL}/auth/google`

@@ -9,7 +9,7 @@ import { register } from "@/services/auth/auth.service";
 import { addToMyList, removeFromMyList } from "@/services/my-list.service";
 import { useEffect } from "react";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://nasflix-net-krpr.vercel.app/";
 
 /* ─────────────── variants ─────────────── */
 

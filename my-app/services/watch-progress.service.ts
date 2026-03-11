@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://nasflix-net-krpr.vercel.app/";
 
 async function fetchApi(path: string, options: RequestInit = {}) {
   const res = await fetch(`${API_URL}${path}`, {

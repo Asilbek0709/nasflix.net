@@ -13,7 +13,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     super({
       clientID: config.get<string>('GOOGLE_CLIENT_ID')!,
       clientSecret: config.get<string>('GOOGLE_CLIENT_SECRET')!,
-      callbackURL: 'http://localhost:5000/auth/google/callback',
+      callbackURL: 'https://nasflix-net-krpr.vercel.app//auth/google/callback',
       scope: ['email', 'profile'],
     });
   }

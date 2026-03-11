@@ -7,7 +7,7 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import { motion, AnimatePresence, Variants } from "motion/react";
 import { register } from "@/services/auth/auth.service";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://nasflix-net-krpr.vercel.app/";
 
 /* ─────────────── variants ─────────────── */
 
